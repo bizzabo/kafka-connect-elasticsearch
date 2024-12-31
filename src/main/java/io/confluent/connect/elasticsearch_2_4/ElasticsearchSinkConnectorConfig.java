@@ -180,10 +180,12 @@ public class ElasticsearchSinkConnectorConfig extends AbstractConfig {
   private static final String TYPE_NAME_DISPLAY = "Type Name";
 
   public static final String ROUTE_NAME_CONFIG = "route.name";
+  public static final String ROUTE_NAME_DEFAULT_VALUE = null;
   private static final String ROUTE_NAME_DOC = "The Elasticsearch route name to use when indexing.";
   private static final String ROUTE_NAME_DISPLAY = "Route Name";
 
   public static final String PARENT_NAME_CONFIG = "parent.name";
+  public static final String PARENT_NAME_DEFAULT_VALUE = null;
   private static final String PARENT_NAME_DOC = "The Elasticsearch parent name to use when indexing.";
   private static final String PARENT_NAME_DISPLAY = "Parent Name";
 
@@ -621,6 +623,7 @@ public class ElasticsearchSinkConnectorConfig extends AbstractConfig {
         ).define(
             ROUTE_NAME_CONFIG,
             Type.STRING,
+            ROUTE_NAME_DEFAULT_VALUE,
             Importance.HIGH,
             ROUTE_NAME_DOC,
             DATA_CONVERSION_GROUP,
@@ -630,6 +633,7 @@ public class ElasticsearchSinkConnectorConfig extends AbstractConfig {
         ).define(
             PARENT_NAME_CONFIG,
             Type.STRING,
+            PARENT_NAME_DEFAULT_VALUE,
             Importance.HIGH,
             PARENT_NAME_DOC,
             DATA_CONVERSION_GROUP,
@@ -1190,7 +1194,7 @@ public class ElasticsearchSinkConnectorConfig extends AbstractConfig {
 
   public String route() {
     String route = getString(ROUTE_NAME_CONFIG);
-    if (route.compareToIgnoreCase("null") == 0) {
+    if (route != null && route.compareToIgnoreCase("null") == 0) {
       return null;
     }
     return route;
@@ -1198,7 +1202,7 @@ public class ElasticsearchSinkConnectorConfig extends AbstractConfig {
 
   public String parent() {
     String parent = getString(PARENT_NAME_CONFIG);
-    if (parent.compareToIgnoreCase("null") == 0) {
+    if (parent != null && parent.compareToIgnoreCase("null") == 0) {
       return null;
     }
     return parent;
