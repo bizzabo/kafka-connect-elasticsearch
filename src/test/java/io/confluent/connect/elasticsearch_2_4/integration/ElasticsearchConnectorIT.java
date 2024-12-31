@@ -21,7 +21,6 @@ import static io.confluent.connect.elasticsearch_2_4.ElasticsearchSinkConnectorC
 import static io.confluent.connect.elasticsearch_2_4.ElasticsearchSinkConnectorConfig.LINGER_MS_CONFIG;
 import static io.confluent.connect.elasticsearch_2_4.ElasticsearchSinkConnectorConfig.WRITE_METHOD_CONFIG;
 import static org.apache.kafka.connect.runtime.ConnectorConfig.VALUE_CONVERTER_CLASS_CONFIG;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -32,10 +31,10 @@ import io.confluent.connect.elasticsearch_2_4.Mapping;
 import io.confluent.connect.elasticsearch_2_4.TestUtils;
 import io.confluent.connect.elasticsearch_2_4.jest.JestElasticsearchClient.WriteMethod;
 import java.util.Collections;
+
 import org.apache.kafka.connect.data.Schema;
 import org.apache.kafka.connect.storage.StringConverter;
 import org.apache.kafka.test.IntegrationTest;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.slf4j.Logger;
@@ -45,12 +44,6 @@ import org.slf4j.LoggerFactory;
 public class ElasticsearchConnectorIT extends ElasticsearchConnectorBaseIT {
 
   private static Logger log = LoggerFactory.getLogger(ElasticsearchConnectorIT.class);
-
-  @BeforeClass
-  public static void setupBeforeAll() {
-    container = ElasticsearchContainer.fromSystemProperties();
-    container.start();
-  }
 
   @Test
   public void testChangeConfigsAndRestart() throws Exception {
@@ -124,8 +117,8 @@ public class ElasticsearchConnectorIT extends ElasticsearchConnectorBaseIT {
     // wait for tasks to spin up
     waitForConnectorToStart(CONNECTOR_NAME, TASKS_MAX);
 
-    for (int i  = 0; i < NUM_RECORDS; i++) {
-      connect.kafka().produce(TOPIC, String.valueOf(i),  String.valueOf(i));
+    for (int i = 0; i < NUM_RECORDS; i++) {
+      connect.kafka().produce(TOPIC, String.valueOf(i), String.valueOf(i));
     }
 
     waitForRecords(0);
