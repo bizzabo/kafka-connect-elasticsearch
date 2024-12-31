@@ -38,6 +38,7 @@ import static io.confluent.connect.elasticsearch_2_4.ElasticsearchSinkConnectorC
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@SuppressWarnings("deprecation")
 public class MappingTest extends ElasticsearchSinkTestBase {
 
   private static final String INDEX = "kafka-connect";
