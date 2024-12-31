@@ -34,4 +34,29 @@
       files="JestElasticsearchClient.java"
     />
 
+    <suppress
+      checks="PackageName"
+      files="io.confluent.connect.elasticsearch_2_4.*"
+    />
+
+    <suppress
+      checks="CyclomaticComplexity"
+      files="io.confluent.connect.elasticsearch_2_4.*"
+    />
+
+    <suppress
+      checks="NPathComplexity"
+      files="io.confluent.connect.elasticsearch_2_4.ElasticsearchWriter"
+    />
+
+    <suppress
+      checks="ClassDataAbstractionCoupling"
+      files="io.confluent.connect.elasticsearch_2_4.ElasticsearchWriter"
+    />
+
+    <suppress
+      checks="LineLength"
+      files="io.confluent.connect.elasticsearch_2_4.ElasticsearchSinkConnectorConfig"
+    />
+
 </suppressions>
