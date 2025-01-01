@@ -69,7 +69,6 @@ import org.apache.http.nio.conn.ssl.SSLIOSessionStrategy;
 import org.apache.kafka.common.config.ConfigException;
 import org.apache.kafka.common.network.Mode;
 import org.apache.kafka.common.security.ssl.SslFactory;
-import org.apache.kafka.common.utils.SystemTime;
 import org.apache.kafka.common.utils.Time;
 import org.apache.kafka.connect.data.Schema;
 import org.apache.kafka.connect.errors.ConnectException;
@@ -113,7 +112,7 @@ public class JestElasticsearchClient implements ElasticsearchClient {
 
   private int maxRetries;
   private long retryBackoffMs;
-  private final Time time = new SystemTime();
+  private final Time time = Time.SYSTEM;
   private int retryOnConflict;
 
   // visible for testing

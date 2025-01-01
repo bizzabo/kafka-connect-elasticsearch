@@ -25,7 +25,7 @@ import io.confluent.connect.elasticsearch_2_4.jest.JestElasticsearchClient;
 import io.confluent.connect.elasticsearch_2_4.parent.mapping.ParentMapper;
 import io.confluent.connect.elasticsearch_2_4.route.mapping.RouteMapper;
 import io.confluent.connect.elasticsearch_2_4.type.mapping.TypeMapper;
-import org.apache.kafka.common.utils.SystemTime;
+import org.apache.kafka.common.utils.Time;
 import org.apache.kafka.connect.errors.ConnectException;
 import org.apache.kafka.connect.sink.ErrantRecordReporter;
 import org.apache.kafka.connect.sink.SinkRecord;
@@ -406,7 +406,7 @@ public class ElasticsearchWriter {
   private BulkProcessor<IndexableRecord, ?> getBulkProcessor(String clusterKey) {
     if (!bulkProcessors.containsKey(clusterKey)) {
       BulkProcessor<IndexableRecord, ?> bp = new BulkProcessor<>(
-          new SystemTime(),
+          Time.SYSTEM,
           new BulkIndexingClient(getClient(clusterKey)),
           maxBufferedRecords,
           maxInFlightRequests,
